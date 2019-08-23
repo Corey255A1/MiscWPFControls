@@ -1,0 +1,16 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MiscWPFControls"
+        xmlns:Compass="clr-namespace:MiscWPFControls.Controls.Compass" x:Class="MiscWPFControls.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="364.5" Width="239" Name="mainWindow">
+    <Grid>
+
+        <Compass:Compass HorizontalAlignment="Left" Height="200" Margin="10,49,0,0" VerticalAlignment="Top" Width="200" StarColor="Green" BackgroundFill="LightGray" NeedleAngle="{Binding Angle, ElementName=mainWindow}" NeedleLength="0.8"/>
+        <Slider HorizontalAlignment="Left" Margin="10,254,0,0" VerticalAlignment="Top" Width="200" Height="21" Maximum="359" Value="{Binding Angle}"/>
+
+    </Grid>
+</Window>
