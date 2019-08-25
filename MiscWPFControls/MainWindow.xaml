@@ -4,13 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MiscWPFControls"
-        xmlns:Compass="clr-namespace:MiscWPFControls.Controls.Compass" x:Class="MiscWPFControls.MainWindow"
+        xmlns:Compass="clr-namespace:MiscWPFControls.Controls.Compass" xmlns:Thermometer="clr-namespace:MiscWPFControls.Controls.Thermometer" x:Class="MiscWPFControls.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="364.5" Width="239" Name="mainWindow">
+        Title="MainWindow" Height="364.5" Width="638.548" x:Name="mainWindow">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Compass:Compass Grid.Column="0" HorizontalAlignment="Center" Height="200" Margin="0,49,0,0" VerticalAlignment="Top" Width="200" StarColor="Green" BackgroundFill="LightGray" NeedleAngle="{Binding Angle, ElementName=mainWindow}" NeedleLength="0.8"/>
+        <Slider Grid.Column="0" HorizontalAlignment="Center" Margin="0,254,0,0" VerticalAlignment="Top" Width="200" Height="21" Maximum="359" Value="{Binding Angle}"/>
 
-        <Compass:Compass HorizontalAlignment="Left" Height="200" Margin="10,49,0,0" VerticalAlignment="Top" Width="200" StarColor="Green" BackgroundFill="LightGray" NeedleAngle="{Binding Angle, ElementName=mainWindow}" NeedleLength="0.8"/>
-        <Slider HorizontalAlignment="Left" Margin="10,254,0,0" VerticalAlignment="Top" Width="200" Height="21" Maximum="359" Value="{Binding Angle}"/>
+        <Slider Grid.Column="1" HorizontalAlignment="Left" Margin="58,15,225,0" VerticalAlignment="Top" Width="32" Height="300" Maximum="50"  Minimum="-30" Value="37" Name="tempSlider" Orientation="Vertical" />
+        <Thermometer:Thermometer Grid.Column="1" HorizontalAlignment="Center" Margin="108,10,107,13" VerticalAlignment="Stretch" Temperature="{Binding Value, ElementName=tempSlider}"/>
 
     </Grid>
 </Window>
