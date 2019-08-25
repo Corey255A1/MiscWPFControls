@@ -48,6 +48,8 @@ namespace MiscWPFControls.Controls.Thermometer
             set
             {
                 minTemp = value;
+                temperatureStep = (temperatureTube.ActualHeight - (bulb.ActualHeight / 2)) / (maxTemp - minTemp);
+                NotifyPropertyChanged(nameof(TemperatureHeight));
                 NotifyPropertyChanged(nameof(MinTemperatureStr));
             }
         }
@@ -64,6 +66,8 @@ namespace MiscWPFControls.Controls.Thermometer
             set
             {
                 maxTemp = value;
+                temperatureStep = (temperatureTube.ActualHeight - (bulb.ActualHeight / 2)) / (maxTemp - minTemp);
+                NotifyPropertyChanged(nameof(TemperatureHeight));
                 NotifyPropertyChanged(nameof(MaxTemperatureStr));
             }
         }
