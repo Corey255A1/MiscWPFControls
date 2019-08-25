@@ -25,8 +25,8 @@
             <Rectangle Grid.Column="1" Stroke="Black" StrokeThickness="3" RadiusX="5" RadiusY="5" Fill="White" Name="temperatureTube"/>
             <Rectangle Grid.Column="1" RadiusX="10" RadiusY="10" Fill="Red" VerticalAlignment="Bottom" Height="{Binding TemperatureHeight}" Margin="3,0,3,0"/>
         </Grid>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding MaxTemperature, FallbackValue=50°C}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding MinTemperature, FallbackValue=-30°C}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding MaxTemperatureStr, FallbackValue=50°C}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding MinTemperatureStr, FallbackValue=-30°C}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         <Ellipse Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="1" Stroke="Black" StrokeThickness="3" Fill="Red" Name="bulb"/>
         <TextBlock Grid.Row="1" Grid.Column="1"  Grid.RowSpan="2" Grid.ColumnSpan="1" Text="{Binding TemperatureText, FallbackValue=-30°C}" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>

@@ -27,27 +27,60 @@ namespace MiscWPFControls.Controls.Thermometer
 
 
         //-30C to 50C -> 80
-        private double minC = -30.0;
-        public string MinTemperature
+
+        private bool isCelsius = true;
+        public bool IsCelsius
         {
-            get => $"{(int)minC}°C";
+            get => isCelsius;
+            set
+            {
+                isCelsius = value;
+                NotifyPropertyChanged(nameof(MinTemperatureStr));
+                NotifyPropertyChanged(nameof(MaxTemperatureStr));
+                NotifyPropertyChanged(nameof(TemperatureText));
+            }
+        }
+        
+        private double minTemp = -30.0;
+        public double MinTemperature
+        {
+            get => minTemp;
+            set
+            {
+                minTemp = value;
+                NotifyPropertyChanged(nameof(MinTemperatureStr));
+            }
         }
 
-        private double maxC = 50.0;
-        public string MaxTemperature
+        public string MinTemperatureStr
         {
-            get => $"{(int)maxC}°C";
+            get => $"{(int)minTemp}°"+ (isCelsius ? "C":"F");
+        }
+
+        private double maxTemp = 50.0;
+        public double MaxTemperature
+        {
+            get => maxTemp;
+            set
+            {
+                maxTemp = value;
+                NotifyPropertyChanged(nameof(MaxTemperatureStr));
+            }
+        }
+        public string MaxTemperatureStr
+        {
+            get => $"{(int)maxTemp}°" + (isCelsius ? "C" : "F");
         }
 
         private double temperatureStep = 1;
         public double TemperatureHeight
         {
-            get => bulb!=null?((Temperature-minC) * temperatureStep) + (bulb.ActualHeight / 2): ((Temperature - minC) * temperatureStep);
+            get => bulb!=null?((Temperature-minTemp) * temperatureStep) + (bulb.ActualHeight / 2): ((Temperature - minTemp) * temperatureStep);
         }
 
         public string TemperatureText
         {
-            get => $"{(int)Temperature}°C";
+            get => $"{(int)Temperature}°" + (isCelsius ? "C" : "F");
         }
 
         public double Temperature
@@ -72,7 +105,7 @@ namespace MiscWPFControls.Controls.Thermometer
             {
                 case "ActualHeight":
                     {
-                        temperatureStep = (temperatureTube.ActualHeight-(bulb.ActualHeight/2)) / (maxC - minC);
+                        temperatureStep = (temperatureTube.ActualHeight-(bulb.ActualHeight/2)) / (maxTemp - minTemp);
                         NotifyPropertyChanged(nameof(TemperatureHeight));
                     }
                     break;
