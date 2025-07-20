@@ -9,25 +9,28 @@
     <UserControl.Resources>
         <ResourceDictionary Source="CompassResources.xaml"/>
     </UserControl.Resources>
-    <Grid>
-        <Ellipse Stroke="Black" StrokeThickness="4" Fill="{Binding BackgroundFill}"/>
-        <Ellipse Fill="{Binding Source={StaticResource Star}}" Margin="10"/>
-        <Ellipse Fill="{Binding Source={StaticResource NSWE}}" Margin="10"/>
-        <!--<Line X1="225" X2="225" Y1="0" Y2="450" StrokeThickness="10" RenderTransformOrigin="0.5, 0.5">-->
-        <Line X1="{Binding CenterWidth}" X2="{Binding CenterWidth}" Y1="{Binding NeedleStart}" Y2="{Binding NeedleEnd}" StrokeThickness="10" RenderTransformOrigin="0.5, 0.5" StrokeStartLineCap="Triangle">
-            <Line.Stroke>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Red" Offset="0.2"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Line.Stroke>
-            <Line.RenderTransform>
-                <TransformGroup>
-                    <RotateTransform Angle="{Binding NeedleAngle}"/>
-                </TransformGroup>
-            </Line.RenderTransform>
+    <Viewbox>
+        <Canvas Width="256" Height="256">
+            <Ellipse Stroke="Black" StrokeThickness="4" Fill="{Binding BackgroundFill, RelativeSource={RelativeSource AncestorType=UserControl}}"  Width="256" Height="256"/>
+            <Ellipse Fill="{Binding Source={StaticResource Star}}" Width="256" Height="256"/>
+            <Ellipse Fill="{Binding Source={StaticResource NSWE}}" Width="256" Height="256"/>
+            <!--<Line X1="225" X2="225" Y1="0" Y2="450" StrokeThickness="10" RenderTransformOrigin="0.5, 0.5">-->
+            <Line X1="128" X2="128" Y1="0" Y2="256" Width="256" Height="256" StrokeThickness="10" RenderTransformOrigin="0.5, 0.5" StrokeStartLineCap="Triangle">
+                <Line.Stroke>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Red" Offset="0.2"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Line.Stroke>
+                <Line.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="{Binding NeedleAngle, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                    </TransformGroup>
+                </Line.RenderTransform>
 
-        </Line>
+            </Line>
 
-    </Grid>
+        </Canvas>
+    </Viewbox>
+
 </UserControl>

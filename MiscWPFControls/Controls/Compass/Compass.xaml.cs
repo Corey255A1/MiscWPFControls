@@ -20,55 +20,16 @@ namespace MiscWPFControls.Controls.Compass
     /// <summary>
     /// Interaction logic for Compass.xaml
     /// </summary>
-    public partial class Compass : UserControl, INotifyPropertyChanged
+    public partial class Compass : UserControl
     {
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged([CallerMemberName]string name="") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-
-        private Brush starColor = Brushes.Red;
         public Brush StarColor
         {
-            get => starColor;
-            set
-            {
-                starColor = value;
-                NotifyPropertyChanged();
-            }
+            get { return (Brush)GetValue(StarColorProperty); }
+            set { SetValue(StarColorProperty, value); }
         }
 
-        private Brush backgroundFill = Brushes.Gray;
-        public Brush BackgroundFill
-        {
-            get => backgroundFill;
-            set
-            {
-                backgroundFill = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private double centerWidth = 225;
-        public double CenterWidth
-        {
-            get => centerWidth;
-            set
-            {
-                centerWidth = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private double centerHeight = 225;
-        public double CenterHeight
-        {
-            get => centerHeight;
-            set
-            {
-                centerHeight = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public static readonly DependencyProperty StarColorProperty =
+            DependencyProperty.Register("StarColor", typeof(Brush), typeof(Compass), new PropertyMetadata(Brushes.Red));
 
 
         public double NeedleAngle
@@ -77,66 +38,96 @@ namespace MiscWPFControls.Controls.Compass
             set { SetValue(NeedleAngleProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for NeedleAngle.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty NeedleAngleProperty =
             DependencyProperty.Register("NeedleAngle", typeof(double), typeof(Compass), new PropertyMetadata(45.0));
 
 
+        public Brush BackgroundFill
+        {
+            get { return (Brush)GetValue(BackgroundFillProperty); }
+            set { SetValue(BackgroundFillProperty, value); }
+        }
+
+        public static readonly DependencyProperty BackgroundFillProperty =
+            DependencyProperty.Register("BackgroundFill", typeof(Brush), typeof(Compass), new PropertyMetadata(Brushes.Gray));
 
 
-        private double needleLength = 0.9;
+        //private double centerWidth = 225;
+        //public double CenterWidth
+        //{
+        //    get => centerWidth;
+        //    set
+        //    {
+        //        centerWidth = value;
+        //        NotifyPropertyChanged();
+        //    }
+        //}
+
+        //private double centerHeight = 225;
+        //public double CenterHeight
+        //{
+        //    get => centerHeight;
+        //    set
+        //    {
+        //        centerHeight = value;
+        //        NotifyPropertyChanged();
+        //    }
+        //}
+
+
         public double NeedleLength
         {
-            get => needleLength;
-            set
-            {
-                needleLength = value;
-                NotifyPropertyChanged();
-            }
+            get { return (double)GetValue(NeedleLengthProperty); }
+            set { SetValue(NeedleLengthProperty, value); }
         }
 
-        private double needleStart = (450 - 450 * 0.9)/2;
-        public double NeedleStart
-        {
-            get => needleStart;
-            private set
-            {
-                needleStart = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private double needleEnd = 450 - (450 - 450 * 0.9) / 2;
-        public double NeedleEnd
-        {
-            get => needleEnd;
-            private set
-            {
-                needleEnd = value;
-                NotifyPropertyChanged();
-            }
-        }
+        // Using a DependencyProperty as the backing store for NeedleLength.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NeedleLengthProperty =
+            DependencyProperty.Register("NeedleLength", typeof(double), typeof(Compass), new PropertyMetadata(0.9));
+
+
+
+        //private double needleStart = (450 - 450 * 0.9)/2;
+        //public double NeedleStart
+        //{
+        //    get => needleStart;
+        //    private set
+        //    {
+        //        needleStart = value;
+        //        NotifyPropertyChanged();
+        //    }
+        //}
+        //private double needleEnd = 450 - (450 - 450 * 0.9) / 2;
+        //public double NeedleEnd
+        //{
+        //    get => needleEnd;
+        //    private set
+        //    {
+        //        needleEnd = value;
+        //        NotifyPropertyChanged();
+        //    }
+        //}
 
         public Compass()
         {
-            this.DataContext = this;
             InitializeComponent();
         }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
-            switch (e.Property.Name)
-            {
-                case "ActualWidth": CenterWidth = ActualWidth / 2; break;
-                case "ActualHeight":
-                    {
-                        CenterHeight = ActualHeight / 2;
-                        var offset = (ActualHeight - needleLength * ActualHeight) / 2;
-                        NeedleStart = offset;
-                        NeedleEnd = ActualHeight - offset;
-                    }
-                    break;
-            }
+            //switch (e.Property.Name)
+            //{
+            //    case "ActualWidth": CenterWidth = ActualWidth / 2; break;
+            //    case "ActualHeight":
+            //        {
+            //            CenterHeight = ActualHeight / 2;
+            //            var offset = (ActualHeight - needleLength * ActualHeight) / 2;
+            //            NeedleStart = offset;
+            //            NeedleEnd = ActualHeight - offset;
+            //        }
+            //        break;
+            //}
         }
 
 

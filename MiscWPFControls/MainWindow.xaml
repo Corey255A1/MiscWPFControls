@@ -7,16 +7,30 @@
         xmlns:Compass="clr-namespace:MiscWPFControls.Controls.Compass" xmlns:Thermometer="clr-namespace:MiscWPFControls.Controls.Thermometer" x:Class="MiscWPFControls.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="364.5" Width="638.548" x:Name="mainWindow">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Compass:Compass Grid.Column="0" HorizontalAlignment="Center" Height="200" Margin="0,49,0,0" VerticalAlignment="Top" Width="200" StarColor="Green" BackgroundFill="LightGray" NeedleAngle="{Binding Angle, ElementName=mainWindow}" NeedleLength="0.8"/>
-        <Slider Grid.Column="0" HorizontalAlignment="Center" Margin="0,254,0,0" VerticalAlignment="Top" Width="200" Height="21" Maximum="359" Value="{Binding Angle}"/>
+    <Window.DataContext>
+        <local:ControlShowCaseViewModel/>
+    </Window.DataContext>
+    <ListView>
+        <ListView.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel></WrapPanel>
+            </ItemsPanelTemplate>
+        </ListView.ItemsPanel>
+        <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+        </ListView.ItemContainerStyle>
+        <StackPanel>
+            <Compass:Compass Width="100" Height="100" StarColor="Green" BackgroundFill="LightGray" NeedleAngle="{Binding Angle}" NeedleLength="0.7"/>
+            <Compass:Compass Width="100" Height="100" StarColor="Yellow" BackgroundFill="CadetBlue" NeedleAngle="{Binding Angle}" NeedleLength="0.7"/>
+            <Slider Grid.Column="0" Maximum="359" Value="{Binding Angle}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Thermometer:Thermometer DataContext="{Binding}" Height="100"  Temperature="{Binding Value}" IsCelsius="True" MinTemperature="-30"/>
+            <Slider Width="32" Height="100" Maximum="50"  Minimum="-30" Value="37" Name="tempSlider" Orientation="Vertical" />
+        </StackPanel>
 
-        <Slider Grid.Column="1" HorizontalAlignment="Left" Margin="58,15,225,0" VerticalAlignment="Top" Width="32" Height="300" Maximum="50"  Minimum="-30" Value="37" Name="tempSlider" Orientation="Vertical" />
-        <Thermometer:Thermometer Grid.Column="1" HorizontalAlignment="Center" Margin="108,10,107,13" VerticalAlignment="Stretch" Temperature="{Binding Value, ElementName=tempSlider}" IsCelsius="True" MinTemperature="-30"/>
 
-    </Grid>
+    </ListView>
 </Window>

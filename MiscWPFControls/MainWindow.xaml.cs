@@ -20,25 +20,10 @@ namespace MiscWPFControls
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged([CallerMemberName]string name = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        private double angle = 45;
-        public double Angle
-        {
-            get => angle;
-            set
-            {
-                angle = value;
-                NotifyPropertyChanged();
-            }
-        }
-
         public MainWindow()
         {
-            this.DataContext = this;
             InitializeComponent();
         }
     }

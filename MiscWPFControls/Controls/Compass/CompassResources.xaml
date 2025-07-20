@@ -17,7 +17,7 @@
         <DrawingBrush.Drawing>
             <DrawingGroup>
                 <DrawingGroup.Children>
-                    <GeometryDrawing Brush="{Binding StarColor, FallbackValue=Blue}" Geometry="F1 M 140,70L 80,60L 70,0L 60,60L 0,70L 60,80L 70,140L 80,80L 140,70 Z "/>
+                    <GeometryDrawing Brush="{Binding StarColor, FallbackValue=Blue, RelativeSource={RelativeSource AncestorType=UserControl}}" Geometry="F1 M 140,70L 80,60L 70,0L 60,60L 0,70L 60,80L 70,140L 80,80L 140,70 Z "/>
                 </DrawingGroup.Children>
             </DrawingGroup>
         </DrawingBrush.Drawing>
