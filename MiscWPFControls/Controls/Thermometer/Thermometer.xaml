@@ -4,30 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MiscWPFControls.Controls.Thermometer"
-             mc:Ignorable="d" Height="300" Width="100">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="14*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Column="1" Grid.RowSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Rectangle Grid.Column="1" Stroke="Black" StrokeThickness="3" RadiusX="5" RadiusY="5" Fill="White" Name="temperatureTube"/>
-            <Rectangle Grid.Column="1" RadiusX="10" RadiusY="10" Fill="Red" VerticalAlignment="Bottom" Height="{Binding TemperatureHeight}" Margin="3,0,3,0"/>
-        </Grid>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding MaxTemperatureStr, FallbackValue=50°C}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding MinTemperatureStr, FallbackValue=-30°C}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-        <Ellipse Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="1" Stroke="Black" StrokeThickness="3" Fill="Red" Name="bulb"/>
-        <TextBlock Grid.Row="1" Grid.Column="1"  Grid.RowSpan="2" Grid.ColumnSpan="1" Text="{Binding TemperatureText, FallbackValue=-30°C}" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    </Grid>
+             xmlns:conv="clr-namespace:MiscWPFControls.Converters"
+             mc:Ignorable="d" d:Height="100" d:Width="50">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <conv:TemperatureConverter x:Key="TemperatureConverter"/>
+            <conv:ScaleConverter x:Key="ScaleConverter" MaxValue="255"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Viewbox>
+        <Canvas Height="300" Width="120">        
+            <Rectangle Stroke="Black" StrokeThickness="3" RadiusX="5" RadiusY="5" Canvas.Left="45" Width="40" Height="255" Fill="White"/>
+                <Rectangle RadiusX="10" RadiusY="10" Fill="Red" Height="{Binding PercentageOfRange, Converter={StaticResource ScaleConverter}}" Width="20" Canvas.Left="55" Canvas.Bottom="50"/>
+            <TextBlock Text="{Binding MaxTemperatureFormatted, FallbackValue=50 °C}" FontSize="12" FontWeight="Bold"/>
+            <TextBlock Text="{Binding MinTemperatureFormatted, FallbackValue=-100 °C}" Canvas.Bottom="50" FontSize="12" FontWeight="Bold"/>
+            <Ellipse Stroke="Black" StrokeThickness="3" Fill="Red" Canvas.Bottom="0" Canvas.Left="35" Width="60" Height="60"/>
+            <TextBlock Text="{Binding TemperatureFormatted, FallbackValue=100 °C}" FontSize="14" FontWeight="Bold" Canvas.Bottom="20" Canvas.Left="45"/>
+        </Canvas>
+    </Viewbox>
 </UserControl>

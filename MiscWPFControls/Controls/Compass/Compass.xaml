@@ -13,8 +13,7 @@
         <Canvas Width="256" Height="256">
             <Ellipse Stroke="Black" StrokeThickness="4" Fill="{Binding BackgroundFill, RelativeSource={RelativeSource AncestorType=UserControl}}"  Width="256" Height="256"/>
             <Ellipse Fill="{Binding Source={StaticResource Star}}" Width="256" Height="256"/>
-            <Ellipse Fill="{Binding Source={StaticResource NSWE}}" Width="256" Height="256"/>
-            <!--<Line X1="225" X2="225" Y1="0" Y2="450" StrokeThickness="10" RenderTransformOrigin="0.5, 0.5">-->
+            <Ellipse Fill="{Binding Source={StaticResource NSWE}}" Width="256" Height="256"/>            
             <Line X1="128" X2="128" Y1="0" Y2="256" Width="256" Height="256" StrokeThickness="10" RenderTransformOrigin="0.5, 0.5" StrokeStartLineCap="Triangle">
                 <Line.Stroke>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

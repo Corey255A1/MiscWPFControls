@@ -4,12 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MiscWPFControls"
-        xmlns:Compass="clr-namespace:MiscWPFControls.Controls.Compass" xmlns:Thermometer="clr-namespace:MiscWPFControls.Controls.Thermometer" x:Class="MiscWPFControls.MainWindow"
+        xmlns:Compass="clr-namespace:MiscWPFControls.Controls.Compass"
+        xmlns:controlLib="clr-namespace:ControlLibrary.Controls;assembly=ControlLibrary"
+        xmlns:Thermometer="clr-namespace:MiscWPFControls.Controls.Thermometer" 
+        x:Class="MiscWPFControls.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="364.5" Width="638.548" x:Name="mainWindow">
+        Title="Control Showcase" Height="364.5" Width="638.548" x:Name="mainWindow">
     <Window.DataContext>
         <local:ControlShowCaseViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary Source="/Resources/CompassVariations.xaml"/>
+    </Window.Resources>
     <ListView>
         <ListView.ItemsPanel>
             <ItemsPanelTemplate>
@@ -22,15 +28,21 @@
             </Style>
         </ListView.ItemContainerStyle>
         <StackPanel>
-            <Compass:Compass Width="100" Height="100" StarColor="Green" BackgroundFill="LightGray" NeedleAngle="{Binding Angle}" NeedleLength="0.7"/>
-            <Compass:Compass Width="100" Height="100" StarColor="Yellow" BackgroundFill="CadetBlue" NeedleAngle="{Binding Angle}" NeedleLength="0.7"/>
+            <Compass:Compass Margin="4" Width="100" Height="100" StarColor="Green" BackgroundFill="LightGray" NeedleAngle="{Binding Angle}" NeedleLength="0.7"/>
+            <Compass:Compass Margin="4" Width="100" Height="100" StarColor="Yellow" BackgroundFill="CadetBlue" NeedleAngle="{Binding Angle}" NeedleLength="0.7"/>
             <Slider Grid.Column="0" Maximum="359" Value="{Binding Angle}"/>
         </StackPanel>
+        <StackPanel>
+            <controlLib:Compass Margin="4" Width="100" Height="100" Heading="{Binding Angle}"/>
+            <controlLib:Compass Margin="4" Width="100" Height="100" Heading="{Binding Angle}" Style="{StaticResource Ornate}"/>
+            <controlLib:Compass Margin="4" Width="100" Height="50"  Heading="{Binding Angle}"  Style="{StaticResource Digital}"/>
+        </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <Thermometer:Thermometer DataContext="{Binding}" Height="100"  Temperature="{Binding Value}" IsCelsius="True" MinTemperature="-30"/>
+            <Thermometer:Thermometer Height="100" Temperature="{Binding Temperature}" MinTemperature="-10.0" MaxTemperature="50.0"/>
             <Slider Width="32" Height="100" Maximum="50"  Minimum="-30" Value="37" Name="tempSlider" Orientation="Vertical" />
         </StackPanel>
 
+        <Thermometer:Thermometer Height="50" Width="100"  Temperature="{Binding Temperature}" MinTemperature="-10.0" MaxTemperature="50.0"/>
 
     </ListView>
 </Window>

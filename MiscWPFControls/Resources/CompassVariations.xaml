@@ -1,0 +1,58 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controlLib="clr-namespace:ControlLibrary.Controls;assembly=ControlLibrary"
+                    xmlns:conv="clr-namespace:MiscWPFControls.Converters">
+    <BitmapImage x:Key="CompassNeedle" UriSource="/Images/ornate_compass_needle_small.png"/>
+    <BitmapImage x:Key="Compass" UriSource="/Images/ornate_compass_small.png"/>
+    <conv:HeadingConverter x:Key="HeadingConverter"/>
+    <Style x:Key="Ornate" TargetType="controlLib:Compass">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controlLib:Compass}">
+                    <Border
+ BorderBrush="{TemplateBinding BorderBrush}"
+ BorderThickness="{TemplateBinding BorderThickness}">
+                        <Border.Background>
+                            <ImageBrush ImageSource="{StaticResource Compass}"/>
+                        </Border.Background>
+                        <Viewbox>
+                            <Grid Width="256" Height="256">
+                                <Rectangle Width="250" Height="250" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="{StaticResource CompassNeedle}"/>
+                                    </Rectangle.Fill>
+                                    <Rectangle.RenderTransformOrigin>
+                                        <Point X="0.5" Y="0.5"/>
+                                    </Rectangle.RenderTransformOrigin>
+                                    <Rectangle.RenderTransform>
+                                        <TransformGroup>
+                                            <RotateTransform Angle="{Binding Heading, RelativeSource={RelativeSource AncestorType=controlLib:Compass}}"/>
+                                        </TransformGroup>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
+                            </Grid>
+                        </Viewbox>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <SolidColorBrush x:Key="DigitalGreen" Color="#22AA22"/>
+    <SolidColorBrush x:Key="Metal" Color="#223344"/>
+    <Style x:Key="Digital" TargetType="controlLib:Compass">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controlLib:Compass}">
+                    <Border Background="{StaticResource DigitalGreen}" BorderThickness="12" CornerRadius="8" BorderBrush="{StaticResource Metal}">
+                        <Border BorderThickness="8" BorderBrush="{StaticResource DigitalGreen}" CornerRadius="8" Margin="-4">
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Heading, RelativeSource={RelativeSource AncestorType=controlLib:Compass}, Converter={StaticResource HeadingConverter}}"/>
+                        </Border>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
